@@ -12,6 +12,7 @@ router.get('/riot', async (req, res) => {
   const response = await Axios.get(url);
   
   if (response.data.summonerLevel > 100) {
+    console.log("good");
     return res.status(200).json({success: true, data: "you are big mon"});
   } else {
     return res.status(200).json({success: true, data: "you are trash"});
