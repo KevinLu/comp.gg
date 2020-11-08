@@ -99,7 +99,6 @@ const SPLITPUSH_CHAMPIONS = {
 
 const findChampions = async (region, id, accountId, matchHistoryWeight, masteryPointWeight, championType, playerRole) => {
   let data;
-  console.log(playerRole);
   if (championType ==  "ENGAGE") {
     data = ENGAGE_CHAMPIONS;
   } else if (championType ==  "DISENGAGE") {

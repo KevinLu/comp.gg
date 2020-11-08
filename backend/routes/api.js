@@ -34,15 +34,30 @@ router.get('/testingChampName', async (req, res) => {
   return res.status(200).json({success: true, data: name});
 });
 
-router.get('/championList', async (req, res) => {
+router.post('/championList', async (req, res) => {
   try {
-    console.log(req.query.championType);
-    const summonerData = await getSummonerData(req.query.region, req.query.summonerName);
-    const accountId = summonerData.accountId;
-    const id = summonerData.id;
-    const data = await findChampions(req.query.region, id, accountId, req.query.matchHistoryWeight, req.query.masteryPointWeight, req.query.championType, req.query.playerRole);
-    console.log(data);
-    return res.status(200).json({success: true, data: data});
+    const summoners = req.body.summoners;
+    let ret = [];
+    for (const summoner in summoners) {
+      const summonerData = await getSummonerData(req.body.region, summoners[summoner]);
+      const accountId = summonerData.accountId;
+      const id = summonerData.id;
+      let playerRole;
+      if (summoner == "topSummoner") {
+        playerRole = "Top";
+      } else if (summoner == "jungleSummoner") {
+        playerRole = "Jungle";
+      } else if (summoner == "midSummoner") {
+        playerRole = "Middle";
+      } else if (summoner == "BottomSummoner") {
+        playerRole = "Bottom";
+      } else {
+        playerRole = "Support";
+      }
+      const data = await findChampions(req.body.region, id, accountId, 1, 1, req.body.myPlaystyle, playerRole);
+      ret.push(data);
+    }
+    return res.status(200).json({success: true, data: ret});
   } catch (error) {
     return res.status(200).json({success: false, data: "error"});
   }
