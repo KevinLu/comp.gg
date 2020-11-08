@@ -117,10 +117,10 @@ const findChampions = async (region, id, accountId, matchHistoryWeight, masteryP
   let playerChampions = await championRankings(region, id, accountId, matchHistoryWeight, masteryPointWeight);
   let championsFound = 0;
   let champs = [];
-  while(championsFound < 5) {
+  while(championsFound < 3) {
     for (champIdAndRating of playerChampions) {
       let champName = await champIdToName(String(champIdAndRating[0]));
-      if (data[playerRole].includes(champName) && championsFound < 5) {
+      if (data[playerRole].includes(champName) && championsFound < 3) {
         championsFound += 1;
         champs.push(champName);
         playerChampions.pop(champIdAndRating);

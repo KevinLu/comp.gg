@@ -1,4 +1,3 @@
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const Axios = require('axios');
 
 const champIdToName = async (champId) => {

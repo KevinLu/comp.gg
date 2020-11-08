@@ -18,6 +18,7 @@ import Bottom_icon from "../img/Bottom_icon.webp";
 import Support_icon from "../img/Support_icon.webp";
 import Jungle_icon from "../img/Jungle_icon.webp";
 import SummonerCard from "../components/SummonerCard";
+import ChampionCard from "../components/ChampionCard";
 
 function HomePage() {
   const [selectedRegion, setSelectedRegion] = useState("NA");
@@ -127,6 +128,46 @@ function HomePage() {
                 Find Compositions
               </Button>
             </Flex>
+
+            <Flex justifyContent="space-between" mb="2em">
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+            </Flex>
+
+            <Flex justifyContent="space-between" mb="2em">
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+            </Flex>
+
+            <Flex justifyContent="space-between" mb="2em">
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+              <ChampionCard
+                championName="Sylas" />
+            </Flex>
+            
 
           </form>
         </Box>
