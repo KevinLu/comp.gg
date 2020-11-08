@@ -1,3 +1,5 @@
+# COMP.GG
+
 ## Inspiration
 
 We wanted to make custom-built team compositions for our League of Legends Clash team, but we didn't want to sift through a [222 minute long Mobalytics article](https://mobalytics.gg/blog/everything-you-need-to-know-about-team-comps-and-teamfighting-in-league-of-legends/).
