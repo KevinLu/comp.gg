@@ -1,21 +1,34 @@
 import React, {useState} from 'react';
 import {useColorMode} from "@chakra-ui/core";
-import {Flex, Text, Input, Image} from "@chakra-ui/core";
+import {Flex, Text, Input, Image, useToast} from "@chakra-ui/core";
 import Default_icon from "../img/default_icon.jpg";
 import Axios from "axios";
 
 function SummonerCard(props) {
+  const toast = useToast();
   const {colorMode} = useColorMode();
   const [value, setValue] = React.useState("");
+  const [oldValue, setOldValue] = React.useState("");
   const handleChange = (event) => setValue(event.target.value);
   const [Blurred, setBlurred] = useState(null);
   const [SummonerIcon, setSummonerIcon] = useState(Default_icon);
 
-  if (Blurred && value !== "") {
+  if (Blurred && value !== "" && value !== oldValue) {
     Axios.get(`/api/summonerIcon?region=NA&summonerName=${value}`)
       .then((response) => {
         console.log(response.data);
-        setSummonerIcon(response.data.data);
+        if (response.data.success) {
+          setSummonerIcon(response.data.data);
+        } else {
+          toast({
+            title: "Summoner not found.",
+            description: "We can't find a summoner by that name.",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+          });
+          setSummonerIcon(Default_icon);
+        }
       });
   }
 
@@ -37,7 +50,7 @@ function SummonerCard(props) {
       <Input
         value={value}
         onChange={handleChange}
-        onFocus={() => {setBlurred(false);}}
+        onFocus={() => {setBlurred(false); setOldValue(value);}}
         onBlur={() => {setBlurred(true);}}
         fontWeight="600"
         fontSize="1.25em"
