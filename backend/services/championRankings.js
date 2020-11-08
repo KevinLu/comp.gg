@@ -1,14 +1,15 @@
 const rankSummonerChampionMastery = require('./rankSummonerChampionMastery');
 const rankMatchHistory = require('./rankMatchHistory');
 
-const championRankings = async (region, id, accountId) => {
+const championRankings = async (region, id, accountId, matchHistoryWeight, masteryPointWeight) => {
   const rankingsMastery = await rankSummonerChampionMastery(region, id);
   const rankingsHistory = await rankMatchHistory(region, accountId);
-  //console.log(rankingsMastery);
   let rankings = {};
 
+  const MATCH_HISTORY_WEIGHTING = 1;
+  const MASTERY_POINT_WEIGHTING = 1;
+
   for (const championHistory of rankingsHistory) {
-    //rankings[championHistory[0]] = rankingsHistory.indexOf(championHistory) + rankingsMastery.length;
     for (const championMastery of rankingsMastery) {
       if (championHistory[0] == championMastery[0]) {
         rankings[championHistory[0]] = rankingsHistory.indexOf(championHistory) + rankingsMastery.indexOf(championMastery);

@@ -8,6 +8,7 @@ const getMatchHistory = require('../services/getMatchHistory');
 const rankSummonerChampionMastery = require('../services/rankSummonerChampionMastery');
 const rankMatchHistory = require('../services/rankMatchHistory');
 const championRankings = require('../services/championRankings');
+const champIdToName = require('../services/champIdToName');
 
 router.get('/', (req, res) => {
   return res.status(200).json({success: true, msg: "NICE"});
@@ -22,6 +23,11 @@ router.get('/riot', async (req, res) => {
   } else {
     return res.status(200).json({success: true, data: "you are trash"});
   }
+});
+
+router.get('/testingChampName', async (req, res) => {
+  const name = await champIdToName(req.query.champId);
+  return res.status(200).json({success: true, data: name});
 });
 
 router.get('/testing', async (req, res) => {
