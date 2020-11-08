@@ -10,6 +10,7 @@ const rankMatchHistory = require('../services/rankMatchHistory');
 const championRankings = require('../services/championRankings');
 const champIdToName = require('../services/champIdToName');
 const findChampions = require('../services/findChampions');
+const { json } = require('express');
 
 router.get('/', (req, res) => {
   return res.status(200).json({success: true, msg: "NICE"});
@@ -49,15 +50,26 @@ router.post('/championList', async (req, res) => {
         playerRole = "Jungle";
       } else if (summoner == "midSummoner") {
         playerRole = "Middle";
-      } else if (summoner == "BottomSummoner") {
+      } else if (summoner == "botSummoner") {
         playerRole = "Bottom";
       } else {
         playerRole = "Support";
       }
+      console.log(playerRole);
       const data = await findChampions(req.body.region, id, accountId, 1, 1, req.body.myPlaystyle, playerRole);
       ret.push(data);
     }
-    return res.status(200).json({success: true, data: ret});
+    
+    let real = [];
+    for (let i = 0; i < 3; i++) {
+      let item = [];
+      for (let j = 0; j < 5; j++) {
+        item.push(ret[j][i]);
+      }
+      real.push(item);
+    }
+
+    return res.status(200).json({success: true, data: real, old: ret});
   } catch (error) {
     return res.status(200).json({success: false, data: "error"});
   }
