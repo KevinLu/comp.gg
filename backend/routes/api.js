@@ -53,11 +53,12 @@ router.get('/championIcon', async (req, res) => {
     const iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/" + req.query.championName + ".png";
     return res.status(200).json({success: true, data: iconURL});
   } catch (error) {
-    return res.status(200).json({success: false, data: "Champion name does not exist."});
-  }Summon
+    return res.status(200).json({success: false, data: "Summoner name does not exist."});
+  }
 });
 
 router.get('/summonerIcon', async (req, res) => {
+  const url = generateRiotAPIUrl(req.query.region, req.query.summonerName);
   try {
     const response = await Axios.get(url);
     const iconId = response.data.profileIconId;
