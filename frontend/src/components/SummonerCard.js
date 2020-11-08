@@ -17,7 +17,7 @@ function SummonerCard(props) {
       .then((response) => {
         console.log(response.data);
         if (response.data.success) {
-          if (SummonerIcon !== Default_icon) {
+          if (SummonerIcon === Default_icon) {
             setSummonerIcon(response.data.data);
           }
         } else {
@@ -28,7 +28,7 @@ function SummonerCard(props) {
           //   duration: 9000,
           //   isClosable: true,
           // });
-          setSummonerIcon(Default_icon);
+          // setSummonerIcon(Default_icon);
         }
       });
   }

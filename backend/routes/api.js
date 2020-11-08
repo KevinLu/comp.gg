@@ -77,7 +77,10 @@ router.post('/championList', async (req, res) => {
 
 router.get('/championIcon', async (req, res) => {
   try {
-    const iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/" + req.query.championName + ".png";
+    let iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/" + req.query.championName + ".png";
+    if (req.query.championName === "Wukong") {
+      iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/MonkeyKing.png"
+    }
     return res.status(200).json({success: true, data: iconURL});
   } catch (error) {
     return res.status(200).json({success: false, data: "Summoner name does not exist."});

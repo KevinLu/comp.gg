@@ -1,3 +1,3 @@
 module.exports = {
-  riotAPI: 'RGAPI-ffdec1d6-9142-44e1-a371-2ec5b86d7bf5',
+  riotAPI: 'RGAPI-5f2bbb87-a39e-4105-9611-b375dfa0bcb0',
 };

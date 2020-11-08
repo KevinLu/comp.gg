@@ -21,15 +21,15 @@ const ENGAGE_CHAMPIONS = {
 }
 
 const DISENGAGE_CHAMPIONS = {
-"Top": ["Singed","Karma","Malphite","Maokai","Rumble","Poppy","Shen","Lulu","Ornn"],
-"Jungle": ["Nunu","Amumu","Rammus","Trundle","JarvanIV","Skarner","Poppy","Gragas","Shen","Volibear","Sejuani","Zac",
-           "Ivern","Sett"],
-"Middle": ["Kayle","Ryze","Karthus","Chogath","Anivia","Corki","Veigar","Orianna","Cassiopeia","Heimerdinger","Malzahar",
-        "Viktor","Ziggs","Azir","Galio","TwistedFate","Morgana","Zilean","Karma","Malphite","Lux","Xerath","Ahri",
-        "Lulu","Lissandra","Syndra","AurelionSol","Velkoz","Neeko"],
-"Bottom": ["Ashe","Veigar","Swain","Heimerdinger","Ezreal","Varus","Syndra","Senna","Tristana","Draven","Kaisa",
-           "Jinx","Lucian","Kalista","Xayah"],
-"Support": ["Soraka","Morgana","Zilean","Sona","Janna","Karma","Taric","Lux","Lulu","Nami","Yuumi","Bard","Rakan"]
+  'Top': ["Singed","Karma","Malphite","Maokai","Rumble","Poppy","Shen","Lulu","Ornn"],
+  'Jungle': ["Nunu","Amumu","Rammus","Trundle","JarvanIV","Skarner","Poppy","Gragas","Shen","Volibear","Sejuani","Zac",
+            "Ivern","Sett"],
+  'Middle': ["Kayle","Ryze","Karthus","Chogath","Anivia","Corki","Veigar","Orianna","Cassiopeia","Heimerdinger","Malzahar",
+          "Viktor","Ziggs","Azir","Galio","TwistedFate","Morgana","Zilean","Karma","Malphite","Lux","Xerath","Ahri",
+          "Lulu","Lissandra","Syndra","AurelionSol","Velkoz","Neeko"],
+  'Bottom': ["Ashe","Veigar","Swain","Heimerdinger","Ezreal","Varus","Syndra","Senna","Tristana","Draven","Kaisa",
+            "Jinx","Lucian","Kalista","Xayah"],
+  'Support': ["Soraka","Morgana","Zilean","Sona","Janna","Karma","Taric","Lux","Lulu","Nami","Yuumi","Bard","Rakan"]
 }
 
 const POKE_AND_SIEGE_CHAMPIONS = {
