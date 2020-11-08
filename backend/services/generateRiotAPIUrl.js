@@ -12,7 +12,7 @@ const generateRiotAPIUrl = (region, summonerName) => {
   regions.set('LAN', 'LA1');
   regions.set('LAS', 'LA2');
   
-  return `https://${regions.get(region)}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${key.riotAPI}`;
+  return encodeURI(`https://${regions.get(region)}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${key.riotAPI}`);
 }
 
 module.exports = generateRiotAPIUrl
