@@ -2,13 +2,21 @@ import React, {useState} from 'react';
 import {useColorMode} from "@chakra-ui/core";
 import {Flex, Text, Input, Image} from "@chakra-ui/core";
 import Default_icon from "../img/default_icon.jpg";
+import Axios from "axios";
 
 function SummonerCard(props) {
   const {colorMode} = useColorMode();
+  const [value, setValue] = React.useState("");
+  const handleChange = (event) => setValue(event.target.value);
   const [Blurred, setBlurred] = useState(null);
+  const [SummonerIcon, setSummonerIcon] = useState(Default_icon);
 
-  if (Blurred) {
-    // TODO: call API to retrieve summoner icon
+  if (Blurred && value !== "") {
+    Axios.get(`/api/summonerIcon?region=NA&summonerName=${value}`)
+      .then((response) => {
+        console.log(response.data);
+        setSummonerIcon(response.data.data);
+      });
   }
 
   return (
@@ -25,8 +33,10 @@ function SummonerCard(props) {
       alignItems="center">
       <Image boxSize="50px" src={props.laneImage} alt={props.alt} mb="1em" />
       <Text fontWeight="600" mb="2em">{props.laneType}</Text>
-      <Image boxSize="100px" borderRadius="full" src={Default_icon} alt="Summoner icon" mb="1em" />
+      <Image boxSize="100px" borderRadius="full" src={SummonerIcon} alt="Summoner icon" mb="1em" />
       <Input
+        value={value}
+        onChange={handleChange}
         onFocus={() => {setBlurred(false);}}
         onBlur={() => {setBlurred(true);}}
         fontWeight="600"
