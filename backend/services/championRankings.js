@@ -6,8 +6,8 @@ const championRankings = async (region, id, accountId, matchHistoryWeight, maste
   const rankingsHistory = await rankMatchHistory(region, accountId);
   let rankings = {};
 
-  const MATCH_HISTORY_WEIGHTING = 1;
-  const MASTERY_POINT_WEIGHTING = 1;
+  const MATCH_HISTORY_WEIGHTING = matchHistoryWeight;
+  const MASTERY_POINT_WEIGHTING = masteryPointWeight;
 
   for (const championHistory of rankingsHistory) {
     for (const championMastery of rankingsMastery) {
