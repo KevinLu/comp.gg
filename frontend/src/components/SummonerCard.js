@@ -14,7 +14,7 @@ function SummonerCard(props) {
   const [SummonerIcon, setSummonerIcon] = useState(Default_icon);
 
   if (Blurred && value !== "" && value !== oldValue) {
-    Axios.get(`/api/summonerIcon?region=NA&summonerName=${value}`)
+    Axios.get(`/api/summonerIcon?region=${props.region}&summonerName=${value}`)
       .then((response) => {
         console.log(response.data);
         if (response.data.success) {
