@@ -9,7 +9,8 @@ function ChampionCard(props) {
   const {colorMode} = useColorMode();
   const [ChampionIcon, setChampionIcon] = useState(Default_icon);
 
-  Axios.get(`/api/championIcon?championName=${props.championName}`)
+  if (props.championName !== null) {
+    Axios.get(`/api/championIcon?championName=${props.championName}`)
     .then((response) => {
       console.log(response.data);
       if (response.data.success) {
@@ -25,6 +26,9 @@ function ChampionCard(props) {
         setChampionIcon(Default_icon);
       }
     });
+  } else {
+    
+  }
 
   return (
     <Flex

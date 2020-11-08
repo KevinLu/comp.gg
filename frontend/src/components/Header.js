@@ -23,7 +23,7 @@ function Header() {
           <Flex alignItems="center">
             <Image boxSize="50px" src={Clash_Crest_icon} alt="Logo" mr="1em" />
             <Heading as="h1" size="lg">
-              Clash Team Builder
+              COMP.GG
         </Heading>
           </Flex>
         </Link>

@@ -17,7 +17,9 @@ function SummonerCard(props) {
       .then((response) => {
         console.log(response.data);
         if (response.data.success) {
-          setSummonerIcon(response.data.data);
+          if (SummonerIcon !== Default_icon) {
+            setSummonerIcon(response.data.data);
+          }
         } else {
           // toast({
           //   title: "Summoner not found.",
