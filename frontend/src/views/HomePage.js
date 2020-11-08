@@ -6,7 +6,8 @@ import {
   Text,
   Select,
   FormControl,
-  Divider
+  Divider,
+  Progress
 } from "@chakra-ui/core";
 import {Formik, Field} from 'formik';
 import * as Yup from 'yup';
@@ -35,9 +36,10 @@ function HomePage() {
   const handleSupportChange = (event) => setSupportSummoner(event.target.value);
   const [CompsFound, setCompsFound] = useState(false);
   const [Comps, setComps] = useState([]);
+  const [Loading, setLoading] = useState(false);
 
   return (
-    <Box maxWidth={['400px', '628px', '900px', '1080px', '1440px']} m="auto" pt="5%" pl="2%" pr="2%">
+    <Box maxWidth={['400px', '628px', '900px', '1080px', '1440px']} m="auto" pt="2%" pl="10px" pr="10px">
       <Formik
         initialValues={{
           region: "NA",
@@ -53,6 +55,7 @@ function HomePage() {
           myPlaystyle: Yup.string().required('Select your playstyle')
         })}
         onSubmit={(values, {setSubmitting}) => {
+          setLoading(true);
           setTimeout(() => {
             const dataToSubmit = {
               region: values.region,
@@ -72,11 +75,12 @@ function HomePage() {
                   console.log(response.data.data);
                   setCompsFound(true);
                   setComps(response.data.data);
+                  setSubmitting(false);
+                  setLoading(false);
                 } else {
                   console.log(response.data);
                 }
               });
-            setSubmitting(false);
           }, 100);
         }}
       >
@@ -118,7 +122,7 @@ function HomePage() {
                   <FormControl id="myPlaystyle">
                     <Select {...field} fontSize="xl" fontWeight="600" variant="flushed" placeholder="select playstyle">
                       <option value="ENGAGE">Engage Comp</option>
-                      <option value="DISENGAGE">Disengage Comp</option>
+                      {/* <option value="DISENGAGE">Disengage Comp</option> */}
                       <option value="POKE_AND_SIEGE">Poke and Siege</option>
                       <option value="PICK">Play for Picks</option>
                       <option value="SPLITPUSH">Split Push</option>
@@ -186,6 +190,8 @@ function HomePage() {
         )}
       </Formik>
 
+      {Loading ? <Progress isIndeterminate /> : <></>}
+      
       {CompsFound ?
         (Comps.map((lane, index) => {
           return (

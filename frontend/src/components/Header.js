@@ -6,7 +6,7 @@ import {MoonIcon, SunIcon} from '@chakra-ui/icons'
 import Clash_Crest_icon from '../img/Clash_Crest_icon.webp';
 
 const headerStyle = {
-  padding: '2% 5%',
+  padding: '1% 5%',
 };
 
 function Header() {

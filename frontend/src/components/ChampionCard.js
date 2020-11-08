@@ -27,7 +27,7 @@ function ChampionCard(props) {
       }
     });
   } else {
-    
+
   }
 
   return (
@@ -44,7 +44,7 @@ function ChampionCard(props) {
       alignItems="center">
       <Image boxSize="100px" borderRadius="full" src={ChampionIcon} alt="Champion Icon" mb="1em" />
       <Text>
-        {props.championName}
+        {props.championName ? props.championName : `Play more games to calculate.`}
       </Text>
     </Flex>
   );
