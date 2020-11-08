@@ -1,20 +1,24 @@
 import './App.css';
-import {CSSReset, ThemeProvider} from "@chakra-ui/core";
-import {theme} from "@chakra-ui/core";
+import {ChakraProvider, extendTheme} from "@chakra-ui/core";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-
 import HomePage from './views/HomePage';
+
+const config = {
+  useSystemColorMode: true,
+  initialColorMode: "dark",
+}
+
+const customTheme = extendTheme({ config });
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CSSReset />
+    <ChakraProvider theme={customTheme}>
       <Router>
         <Switch>
           <Route exact path="/" component={HomePage} />
         </Switch>
       </Router>
-    </ThemeProvider>
+    </ChakraProvider>
   );
 }
 
