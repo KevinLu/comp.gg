@@ -16,7 +16,17 @@ router.get('/riot', async (req, res) => {
   } else {
     return res.status(200).json({success: true, data: "you are trash"});
   }
+});
+
+router.get('/summonerIcon', async (req, res) => {
   
+  const url = generateRiotAPIUrl(req.query.region, req.query.summonerName);
+  console.log(url);
+  const response = await Axios.get(url);
+  const iconId = response.data.profileIconId;
+  const iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/profileicon/" + iconId + ".png";
+  
+  return res.status(200).json({success: true, data: iconURL});
 });
 
 module.exports = router;
