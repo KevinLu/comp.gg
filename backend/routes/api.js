@@ -5,6 +5,9 @@ const generateRiotAPIUrl = require('../services/generateRiotAPIUrl');
 const getSummonerData = require('../services/getSummonerData');
 const getChampionMasteries = require('../services/getChampionMasteries');
 const getMatchHistory = require('../services/getMatchHistory');
+const rankSummonerChampionMastery = require('../services/rankSummonerChampionMastery');
+const rankMatchHistory = require('../services/rankMatchHistory');
+const championRankings = require('../services/championRankings');
 
 router.get('/', (req, res) => {
   return res.status(200).json({success: true, msg: "NICE"});
@@ -21,15 +24,12 @@ router.get('/riot', async (req, res) => {
   }
 });
 
-router.get('/url', async (req, res) => {
-  const data = await getSummonerData(req.query.region, req.query.summonerName);
-  return res.status(200).json({success: true, data: data});
-});
-
-router.get('/url2', async (req, res) => {
+router.get('/testing', async (req, res) => {
   const summonerData = await getSummonerData(req.query.region, req.query.summonerName);
-  const id = summonerData.accountId;
-  const data = await getMatchHistory(req.query.region, id);
+  const accountId = summonerData.accountId;
+  const id = summonerData.id;
+  const data = await championRankings(req.query.region, id, accountId);
+  console.log(data);
   return res.status(200).json({success: true, data: data});
 });
 
