@@ -4,6 +4,7 @@ const path = require('path');
 const app = express();
 
 const testRouter = require('./routes/test');
+const apiRouter = require('./routes/api');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
@@ -17,6 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.use('/test', testRouter);
+app.use('/api', apiRouter);
 
 const port = process.env.PORT || 5000;
 
