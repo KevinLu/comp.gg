@@ -1,22 +1,20 @@
 const express = require('express');
-const router = express.Router();
+const router = express();
 const Axios = require('axios');
 const generateRiotAPIUrl = require('../services/generateRiotAPIUrl');
 const getSummonerData = require('../services/getSummonerData');
 const getChampionMasteries = require('../services/getChampionMasteries');
-const getMatchHistory = require('../services/getMatchHistory');
 const rankSummonerChampionMastery = require('../services/rankSummonerChampionMastery');
-const rankMatchHistory = require('../services/rankMatchHistory');
 const championRankings = require('../services/championRankings');
 const champIdToName = require('../services/champIdToName');
 const findChampions = require('../services/findChampions');
 const { json } = require('express');
 
-router.get('/', (req, res) => {
+router.get('/', function (req, res) {
   return res.status(200).json({success: true, msg: "NICE"});
 });
 
-router.get('/riot', async (req, res) => {
+router.get('/riot', async function (req, res) {
   try {
     const url = generateRiotAPIUrl(req.query.region, req.query.summonerName);
     const response = await Axios.get(url);
@@ -30,12 +28,12 @@ router.get('/riot', async (req, res) => {
   }
 });
 
-router.get('/testingChampName', async (req, res) => {
+router.get('/testingChampName', async function (req, res) {
   const name = await champIdToName(req.query.champId);
   return res.status(200).json({success: true, data: name});
 });
 
-router.post('/championList', async (req, res) => {
+router.post('/championList', async function (req, res) {
   try {
     const summoners = req.body.summoners;
     let ret = [];
@@ -56,7 +54,8 @@ router.post('/championList', async (req, res) => {
         playerRole = "Support";
       }
       console.log(playerRole);
-      const data = await findChampions(req.body.region, id, accountId, 1, 1, req.body.myPlaystyle, playerRole);
+      const data = await findChampions(req.body.region, id, req.body.myPlaystyle, playerRole);
+      console.log(data);
       ret.push(data);
     }
     
@@ -71,15 +70,15 @@ router.post('/championList', async (req, res) => {
 
     return res.status(200).json({success: true, data: real, old: ret});
   } catch (error) {
-    return res.status(200).json({success: false, data: "error"});
+    return res.status(200).json({success: false, data: "request error"});
   }
 });
 
-router.get('/championIcon', async (req, res) => {
+router.get('/championIcon', async function (req, res) {
   try {
-    let iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/" + req.query.championName + ".png";
+    let iconURL = "http://ddragon.leagueoflegends.com/cdn/11.20.1/img/champion/" + req.query.championName + ".png";
     if (req.query.championName === "Wukong") {
-      iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/champion/MonkeyKing.png"
+      iconURL = "http://ddragon.leagueoflegends.com/cdn/11.20.1/img/champion/MonkeyKing.png"
     }
     return res.status(200).json({success: true, data: iconURL});
   } catch (error) {
@@ -87,12 +86,12 @@ router.get('/championIcon', async (req, res) => {
   }
 });
 
-router.get('/summonerIcon', async (req, res) => {
+router.get('/summonerIcon', async function (req, res) {
   const url = generateRiotAPIUrl(req.query.region, req.query.summonerName);
   try {
     const response = await Axios.get(url);
     const iconId = response.data.profileIconId;
-    const iconURL = "http://ddragon.leagueoflegends.com/cdn/10.22.1/img/profileicon/" + iconId + ".png";
+    const iconURL = "http://ddragon.leagueoflegends.com/cdn/11.20.1/img/profileicon/" + iconId + ".png";
     return res.status(200).json({success: true, data: iconURL});
   } catch (error) {
     return res.status(200).json({success: false, data: "Summoner name does not exist."});

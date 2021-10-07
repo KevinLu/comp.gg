@@ -1,7 +1,7 @@
 const Axios = require('axios');
 
 const champIdToName = async (champId) => {
-  const response = await Axios.get('http://ddragon.leagueoflegends.com/cdn/10.22.1/data/en_US/champion.json');
+  const response = await Axios.get('http://ddragon.leagueoflegends.com/cdn/11.20.1/data/en_US/champion.json');
   const champData = response.data.data;
   
   for (const key in champData) {

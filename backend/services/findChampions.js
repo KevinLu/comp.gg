@@ -97,7 +97,7 @@ const SPLITPUSH_CHAMPIONS = {
 
 }
 
-const findChampions = async (region, id, accountId, matchHistoryWeight, masteryPointWeight, championType, playerRole) => {
+const findChampions = async (region, id, championType, playerRole) => {
   let data;
   if (championType ==  "ENGAGE") {
     data = ENGAGE_CHAMPIONS;
@@ -113,7 +113,7 @@ const findChampions = async (region, id, accountId, matchHistoryWeight, masteryP
     return "error";
   }
 
-  let playerChampions = await championRankings(region, id, accountId, matchHistoryWeight, masteryPointWeight);
+  let playerChampions = await championRankings(region, id);
   let championsFound = 0;
   let champs = [];
   while(championsFound < 3) {
