@@ -1,4 +1,21 @@
 # COMP.GG
+## UPDATE
+INSTRUCTIONS TO RUN COMP.GG AND REASONING FOR IT BEING LIKE THIS NOW:
+
+1. GET YOUR OWN RIOT DEV KEY AND REPLACE MINE WITH IT (backend/config/dev_keys)!! PLEASE DONT USE MINE, I THINK RIOT FUCKS YOU UP IF YOU DO.
+2. Just do `npm run dev`. If this doesn't work, you're gonna need to delete node_modules from both the root directory and the
+comp.gg/frontend directory. Then, run `npm install` in both the root directory and the frontend directory. Should work afterwards.
+
+
+I've deleted the match history part of our calculation. The reason being is that Riot has changed its match history API massively.
+It is much more specific and detailed, and is a lot more difficult to access for our purposes (we just wanted championPlayed from
+each match). Deleting all of this has let our code work again, but now it is less accurate as it is only based on champion mastery.
+
+Furthermore, I updated alot of the API links to reflect the most recent patch as Riot does not host legacy patch versions on their API.
+
+
+LASTLY, I'm sharing this here rather than updating the GitHub code because I don't want to lose that code in case we ever want to
+properly fix the match history issue.
 
 ## Inspiration
 
