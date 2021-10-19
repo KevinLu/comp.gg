@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Flex,
+  SimpleGrid,
   Text,
   Select,
   FormControl,
@@ -36,7 +37,6 @@ function HomePage() {
   const handleSupportChange = (event) => setSupportSummoner(event.target.value);
   const [CompsFound, setCompsFound] = useState(false);
   const [Comps, setComps] = useState([]);
-  const [Loading, setLoading] = useState(false);
 
   return (
     <Box maxWidth={['400px', '628px', '900px', '1080px', '1440px']} m="auto" pt="2%" pl="10px" pr="10px">
@@ -55,7 +55,6 @@ function HomePage() {
           myPlaystyle: Yup.string().required('Select your playstyle')
         })}
         onSubmit={(values, {setSubmitting}) => {
-          setLoading(true);
           setTimeout(() => {
             const dataToSubmit = {
               region: values.region,
@@ -76,7 +75,6 @@ function HomePage() {
                   setCompsFound(true);
                   setComps(response.data.data);
                   setSubmitting(false);
-                  setLoading(false);
                 } else {
                   console.log(response.data);
                 }
@@ -133,8 +131,9 @@ function HomePage() {
               </Field>
             </Flex>
 
-            <Flex justifyContent="space-between" mb="2em">
+            <SimpleGrid minChildWidth="10rem" columns={5} mb="2em" spacing={4}>
               <SummonerCard
+                isSubmitting={props.isSubmitting}
                 submitted={CompsFound}
                 region={selectedRegion}
                 value={topSummoner}
@@ -143,6 +142,7 @@ function HomePage() {
                 alt="Top Lane Icon"
                 laneType="Top" />
               <SummonerCard
+                isSubmitting={props.isSubmitting}
                 submitted={CompsFound}
                 region={selectedRegion}
                 value={jungleSummoner}
@@ -151,6 +151,7 @@ function HomePage() {
                 alt="Jungle Icon"
                 laneType="Jungle" />
               <SummonerCard
+                isSubmitting={props.isSubmitting}
                 submitted={CompsFound}
                 region={selectedRegion}
                 value={midSummoner}
@@ -159,6 +160,7 @@ function HomePage() {
                 alt="Mid Lane Icon"
                 laneType="Mid" />
               <SummonerCard
+                isSubmitting={props.isSubmitting}
                 submitted={CompsFound}
                 region={selectedRegion}
                 value={botSummoner}
@@ -167,6 +169,7 @@ function HomePage() {
                 alt="Bot Lane Icon"
                 laneType="Bot" />
               <SummonerCard
+                isSubmitting={props.isSubmitting}
                 submitted={CompsFound}
                 region={selectedRegion}
                 value={supportSummoner}
@@ -174,7 +177,7 @@ function HomePage() {
                 laneImage={Support_icon}
                 alt="Support Icon"
                 laneType="Support" />
-            </Flex>
+            </SimpleGrid>
 
             <Flex justifyContent="center">
               <Button
@@ -186,11 +189,10 @@ function HomePage() {
                 Find Compositions
               </Button>
             </Flex>
+            {props.isSubmitting ? <Progress isIndeterminate /> : <></>}
           </form>
         )}
       </Formik>
-
-      {Loading ? <Progress isIndeterminate /> : <></>}
       
       {CompsFound ?
         (Comps.map((lane, index) => {
